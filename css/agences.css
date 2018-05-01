@@ -1,0 +1,375 @@
+ body, html {
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#map {
+    height: calc(100% - 5em);
+    width: 100%;
+    display: block;
+}
+
+.w33 {
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+}
+
+.divider-new {
+    text-align: left;
+    font-size: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: #2BBBAD;
+}
+
+.divider-new::before {
+    flex: 0 1 auto;
+}
+
+.divider-new::after {
+    background-color: #2BBBAD;
+}
+
+#menu {
+    height: calc(100% - 4em);
+    width: 0%;
+    display: block;
+    position: absolute;
+    top: 4em;
+    left: 0;
+    z-index: 1001;
+    background-color: #FFFFFF;
+    white-space : nowrap;
+    overflow-x: hidden;
+}
+
+#menu ul li {
+    padding-top: 0.5em;
+    padding-bottom: 0.25em;
+    cursor: pointer;
+}
+
+#menu ul li:hover > i {
+    color: #2BBBAD;
+    font-size: 120%;
+}
+
+#menu i {
+    margin-right: 0.5em;
+    -webkit-transition: 0.3s ease !important;
+        -moz-transition: 0.3s ease !important;
+         -ms-transition: 0.3s ease !important;
+          -o-transition: 0.3s ease !important;
+             transition: 0.3s ease !important;
+}
+
+#logoOptidis {
+    height: 100%;
+}
+
+.navbar .navbar-nav2 {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
+}
+
+.navbar .navbar-nav>li>a {
+    padding: 0;
+}
+
+.menuOpti {
+    height: 100%;
+    float: right;
+    margin-right: 15px;
+    padding: 9px 10px;
+    margin-top: 0.8em;
+    display: block;
+    /*border: 1px solid #FFFFFF;*/
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.menuOpti .icon-bar {
+    background-color: #FFFFFF;
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+}
+
+.menuOpti .icon-bar+.icon-bar {
+    margin-top: 4px;
+}
+
+.menuOpti i {
+    float: left;
+    display: inline-block;
+}
+
+.menuOpti i:nth-child(2){
+    margin-left: 5px;
+}
+
+.imgLogoChbe {
+    height: 1em;
+}
+
+.navbar {
+    margin-bottom: 0;
+    /*height: 4em;*/
+    /*overflow-y: hidden;*/
+}
+
+.h4em {
+    height: 4em;
+    display: inline-block;
+}
+
+#centerMap {
+
+    position: absolute;
+    top: 3em;
+    z-index: 1001;
+    right: -10em;
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    padding-left: 0.25em;
+    background-color: #2BBBAD;
+    color: #FFFFFF;
+
+    font-family: 'Montserrat', sans-serif;
+
+    -webkit-transition: 0.3s ease !important;
+        -moz-transition: 0.3s ease !important;
+         -ms-transition: 0.3s ease !important;
+          -o-transition: 0.3s ease !important;
+             transition: 0.3s ease !important;
+}
+
+#centerMap:hover {
+    right: 0em;
+}
+
+#centerMap:hover > i {
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+#centerMap i {
+    margin-top: 0.25em;
+    font-size: 200%;
+
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+
+    -webkit-transition: 0.3s ease !important;
+        -moz-transition: 0.3s ease !important;
+         -ms-transition: 0.3s ease !important;
+          -o-transition: 0.3s ease !important;
+             transition: 0.3s ease !important;
+}
+
+#centerMap div {
+    width: 10em;
+    display: inline-block;
+    position: relative;
+    bottom: 0.4em;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.modal-dialog .modal-body {
+    -webkit-transition: 0.3s ease !important;
+        -moz-transition: 0.3s ease !important;
+         -ms-transition: 0.3s ease !important;
+          -o-transition: 0.3s ease !important;
+             transition: 0.3s ease !important;
+}
+
+.navbar .navbar-collapse, .navbar .navbar-form,
+.navbar .navbar-nav>.open>a, .navbar .navbar-nav>.open>a:focus, .navbar .navbar-nav>.open>a:hover {
+    height: 4em !important;
+}
+
+.leaflet-top, .leaflet-bottom {
+    z-index: 999;
+}
+
+.mapchoice {
+    cursor: pointer;
+}
+
+.marg0auto {
+    margin: 0 auto;
+}
+
+.noPadding {
+    padding: 0;
+}
+
+.Tcenter {
+    text-align: center;
+}
+
+.noFloat {
+    float: none;
+}
+
+.sep {
+    width: 91.66666667%;
+    float: initial;
+}
+
+input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=search-md]:focus:not([readonly]),input[type=tel]:focus:not([readonly]),
+input[type=text]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=url]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #FFFFFF;
+}
+
+.textareacontent {
+    resize: vertical;
+    width: 100%;
+    display: block;
+    outline: none;
+}
+
+#algoGenSpin {
+    height: 1em;
+    font-size: 10em;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+#algoGenSpinDesc {
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+/***********************/
+.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+    border: none !important;
+    background-clip: none !important;
+}
+
+.leaflet-bar a, .leaflet-bar a:hover {
+    background-color: #2BBBAD !important;
+    border-bottom: none;
+    color: #FFFFFF !important;
+}
+
+.leaflet-control-zoom-in {
+    border-bottom: 1px solid #FFFFFF !important;
+}
+
+
+/************************/
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+
+    /*fix for FF unable to apply focus style bug */
+    border: 1px solid white;
+
+    /*required for proper track sizing in FF*/
+    width: 100%;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background-color: #2BBBAD;
+    margin-top: -4px;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background-color: #2BBBAD;
+}
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 5px;
+
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    background: transparent;
+
+    /*leave room for the larger thumb to overflow with a transparent border */
+    border-color: transparent;
+    border-width: 6px 0;
+
+    /*remove default tick marks*/
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 10px;
+}
+input[type=range]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background-color: #2BBBAD;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #888;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #ccc;
+}
