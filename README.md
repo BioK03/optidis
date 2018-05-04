@@ -5,7 +5,7 @@
 ## What is Optidis ?
 
 Optidis is a cost optimization project for trainings.
-If your company nneds to train a lot of its workers scattered in agencies in some possible training centers, this project is for you.
+If your company needs to train a lot of its workers scattered in agencies in some possible training centers, this project is for you.
 This project permits to generate an 'ideal' solution to this problem.
 
 Costs are the following :
