@@ -1,8 +1,18 @@
+<?php
+
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
         <title>OPTIDIS by CHBE</title>
         <meta charset="UTF-8">
+        
         <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="lib/fontawesome/css/font-awesome.min.css"/>
         <link rel="stylesheet" href="lib/ionicons/css/ionicons.min.css"/>
@@ -26,7 +36,7 @@
                         <p></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i></button>
                     </div>
                 </div>
             </div>
@@ -57,51 +67,52 @@
                     </ul>
                     <ul class="nav navbar-nav2">
                         <li id="liLogo">
-                            <a id="logoProj" class="navbar-brand" href="#"><img id="logoOptidis" src="img/logo.png"/> <i class="fa fa-info-circle"></i></a>
+                            <a id="logoProj" class="navbar-brand" href="#"><img id="logoOptidis" src="img/logo.png"/></a>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-right" role="search">
-                        <div class="form-group waves-effect waves-light">
-                            <input id="inputsearch" type="text" class="form-control" placeholder="Recherche" autocomplete="off">
-                        </div>
-                    </form>
-                    <!--<ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a id="assistant-init" href="#" class="waves-effect waves-light">
-                                <i class="fa fa-magic"></i> Assistant de configuration
+                    <ul class="navbar-right navbar-form">
+                        <li class="nav-item languageSelector dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <span class="selectedLanguage" data-toggle="tooltip" data-placement="bottom" title="NEW !">English</span>
+                                <i class="fa fa-caret-down"></i>
                             </a>
+                            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#" data-lang="en">English</a>
+                                <a class="dropdown-item" href="#" data-lang="fr">Français</a>
+                            </div>
                         </li>
-                    </ul>-->
+                        <li class="nav-item form-inline waves-effect waves-light">
+                            <input id="inputsearch" type="text" class="form-control" placeholder="Search" autocomplete="off" />
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav><!--
         --><div id="menu">
-            <div class="divider-new col-xs-12"><i class="fa fa-magic"></i> Assistant de configuration</div>
+            <div class="divider-new col-xs-12"><i class="fa fa-magic fa-fw"></i> <span id="titleConf">Configuration assistant</span></div>
             <ul class="col-xs-11 col-xs-offset-1">
-                <li id="affAg"><i class='fa fa-street-view'></i> Affecter des agences</li>
-                <li id="affLF"><i class='fa fa-graduation-cap'></i> Affecter les lieux de formation</li>
-                <li id="reinitMap"><i class='fa fa-times'></i> Réinitialiser la carte</li>
-                <li id="reinitFormation"><i class='fa fa-refresh'></i> Fermer les lieux de formation</li>
-                <li id="maskClose" data-hide="hide"><i class='fa fa-graduation-cap'></i> Masquer les lieux de formation fermés</li>
+                <li id="affAg"><i class='fa fa-street-view fa-fw'></i> <span class="textContent">Agencies insertion</span> <span class="protagen"></span></li>
+                <li id="affLF"><i class='fa fa-graduation-cap fa-fw'></i> <span class="textContent">Training centers insertion</span> <span class="protagen"></span></li>
+                <li id="reinitMap"><i class='fa fa-times fa-fw'></i> <span class="textContent">Map reset</span></li>
+                <li id="maskClose" data-hide="hide"><i class='fa fa-graduation-cap fa-fw'></i> <span class="textContent">Hide closed training centers</span></li>
             </ul>
-            <div class="divider-new col-xs-12"><i class="fa fa-cogs"></i> Algorithmes</div>
+            <div class="divider-new col-xs-12"><i class="fa fa-cogs fa-fw"></i> <span id="titleAlgo">Algorithms</span></div>
             <ul class="col-xs-11 col-xs-offset-1">
-                <li id="execAlgoHand"><i class="fa fa-hand-paper-o"></i> Lancer l'algorithme hand-made</li>
-                <li id="execAlgoGen"><i class="fa fa-code-fork"></i> Lancer l'algorithme génétique [WIP]</li>
-                <li id="execAlgoTab"><i class="fa fa-ban"></i> Lancer l'algorithme tabou</li>
+                <li id="execAlgoHand"><i class="fa fa-hand-paper-o fa-fw"></i> <span class="textContent">Launch hand-made algorithm</span> <span class="protagen"></span></li>
+                <li id="execAlgoTab"><i class="fa fa-ban fa-fw"></i> <span class="textContent">Launch tabou algorithm</span> <span class="protagen"></span></li>
             </ul>
-            <div class="divider-new col-xs-12"><i class="fa fa-bookmark"></i> Licenses</div>
+            <div class="divider-new col-xs-12"><i class="fa fa-bookmark fa-fw"></i> <span class="titleInfo">Information</span></div>
             <ul class="col-xs-11 col-xs-offset-1">
-                <li id="licenseLi"><i class="fa fa-print"></i> License OptiDis</li>
-                <li id="expAlgoHM"><i class="fa fa-hand-paper-o"></i> Informations sur l'algorithme hand-made</li>
-                <li id="expAlgoGen"><i class="fa fa-code-fork"></i> Informations sur l'algorithme génétique [WIP]</li>
-                <li id="expAlgoTab"><i class="fa fa-ban"></i> Informations sur l'algorithme tabou</li>
+                <li id="licenseLi"><i class="fa fa-print fa-fw"></i> <span class="textContent">Optidis Licence</span></li>
+                <li id="expAlgoHM"><i class="fa fa-hand-paper-o fa-fw"></i> <span class="textContent">Hand-made algorithm explanation</span></li>
+                <li id="expAlgoTab"><i class="fa fa-ban fa-fw"></i> <span class="textContent">Tabou algorithm explanation</span></li>
             </ul>
+            <input id="inputKey" type="password" class="form-control" placeholder="Enter your key here..." autocomplete="off" />
         </div><!--
         --><div id="map">
-            <span id="centerMap" onclick="map.centerMap('all');"><i class="icon ion-arrow-shrink"></i> <div>CENTRER LA MAP</div></span>
-        </div>
-
+            <span id="centerMap" onclick="map.centerMap('all');"><i class="icon ion-arrow-shrink"></i> <div class="textContent">CENTER MAP</div></span>
+        </div><!--
+        --><span id="demoMenu"><i class="fa fa-play fa-fw"></i> INFO / DEMO</span>    
 
         <!-- GRAPHIC LIBRARIES -->
         <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
@@ -116,22 +127,12 @@
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3"></script>
 
         <!-- CUSTOM CODE -->
-        <!--<script type="text/javascript" src='js/Agence.js'></script>
-        <script type="text/javascript" src='js/LieuFormation.js'></script>-->
+        <script type="text/javascript" src="js/languageChooser.js"></script>
         <script type="text/javascript" src="js/setDefaultValues.js"></script>
+        <script type="text/javascript" src="js/keyStorage.js"></script>
         <script type="text/javascript" src="js/stylescript.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript" src="js/prescript.js"></script>
         <script type="text/javascript" src="js/map.js"></script>
-        <script type="text/javascript" src="js/postscript.js"></script>
-        <script type="text/javascript">
-            /*map.addPointersList([
-                {x:30, y:40, text:"1"},
-                {x:31, y:40, text:"2"},
-                {x:32, y:40, text:"3"},
-                {x:33, y:40, text:"4"},
-            ], "formation");*/
-
-    	</script>
     </body>
 </html>

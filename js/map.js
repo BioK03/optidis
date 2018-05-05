@@ -1,25 +1,8 @@
 
-/*var directionsService = new google.maps.DirectionsService();
-
-var request = {
-    origin      : 'Av.+des+Champs-Élysées,+75008+ParisC',
-    destination : '17+Rue+de+Bruxelles,+69100+Villeurbanne',
-    travelMode  : google.maps.DirectionsTravelMode.DRIVING
-};
-
-directionsService.route(request, function(response, status) {
-    if ( status == google.maps.DirectionsStatus.OK ) {
-        //alert( response.routes[0].legs[0].distance.value ); // the distance in metres
-    }
-    else {
-        console.error("Erreur de calcul de distance");
-    }
-});*/
-
 L.AwesomeMarkers.Icon.prototype.options.prefix = 'fa';
 
 var map = {
-    map: L.map('map').setView([51.505, -0.09], 13),
+    map: L.map('map').setView([48.861828, 2.333457], 13),
     googleGeocodeProvider: new L.GeoSearch.Provider.Google(),
     featureGroups: {
         formation: L.featureGroup(),
@@ -41,8 +24,8 @@ var map = {
         }),
     },
     OpenStreetMap_Mapnik: function(){
-        L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
-			attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: 'Tiles courtesy of <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 		}).addTo(map.map);
         L.control.scale().addTo(map.map);
         map.map.addLayer(map.featureGroups.formation);
@@ -63,10 +46,10 @@ var map = {
                     +datapoints[$i].Y+"'><i class='fa fa-map-marker'></i> "
                     +datapoints[$i].Label+"</p>";
             }
-            popups.showPopup("RESULTATS", $res, true, "", "", false, "", "");
+            
+            popups.showPopup(getTraduction("RESULTS"), $res, true, "", "", false, "", "");
             setTimeout(function(){
                 $(".mapchoice").click(function(){
-                    //map.map.panTo(new L.LatLng($(this).data("y"), $(this).data("x")));
                     var southWest = L.latLng($(this).data("south"), $(this).data("west")),
                         northEast = L.latLng($(this).data("north"), $(this).data("east")),
                         bounds = L.latLngBounds(southWest, northEast);
@@ -91,18 +74,16 @@ var map = {
     addPointersList: function($pointers, $layer){ /* $pointers = [{longitude, latitude, nom}, ...], $layer = "agences"|"formation" */
         if($layer == "agences") {
             console.log("Adding "+$pointers.length+" formation pointers");
-            //map.map.removeLayer(map.featureGroups.agences);
             map.clearAgencesLayer();
             for($i=0; $i<$pointers.length; $i++)
             {
+                console.log($pointers[$i].nom);
                 L.marker([$pointers[$i].latitude, $pointers[$i].longitude],
-                     {icon: map.icons.agences}).addTo(map.featureGroups.agences).bindPopup("<b>"+$pointers[$i].nom+"</b><br/>"+$pointers[$i].nbpersonnes+" personnes à former");
+                     {icon: map.icons.agences}).addTo(map.featureGroups.agences).bindPopup("<b>"+$pointers[$i].nom+"</b><br/>"+$pointers[$i].nbpersonnes+" "+getTraduction("personstotrain"));
             }
-            //map.map.addLayer(map.featureGroups.agences);
         }
         else if ($layer == "formation") {
             console.log("Adding "+$pointers.length+" formation pointers");
-            //map.map.removeLayer(map.featureGroups.formation);
             map.clearFormationLayer();
             for($i=0; $i<$pointers.length; $i++)
             {
@@ -116,16 +97,12 @@ var map = {
                         {icon: map.icons.formationFerme}).addTo(map.featureGroups.formation).bindPopup($pointers[$i].nom);
                 }
             }
-            //map.map.addLayer(map.featureGroups.formation);
         }
         else {
             console.error("addPointersList has received a bad layer name : layer=[agences, formation], given : "+$layer);
         }
         map.centerMap();
     },
-    /*addPointer: function($x, $y, $popupContent){
-        L.marker([$y, $x]).addTo(map.map).bindPopup($popupContent);
-    },*/
     centerMap: function(){
         var bounds = null;
         if(map.featureGroups !== undefined && map.featureGroups.formation !== undefined && map.featureGroups.formation.getBounds())

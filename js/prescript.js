@@ -5,3 +5,8 @@ data.chargerAgences = function(dataagences){
     data.agences = [];
 
 }
+
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip("show");
+});

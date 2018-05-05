@@ -1,8 +1,18 @@
 <?php
 
 header('Content-type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+
 $json = file_get_contents('php://input');
 $json_decode = json_decode($json, true);
+
+require_once("keyChecker.php");
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 class Prog {
     var $agences;
@@ -10,8 +20,9 @@ class Prog {
     var $nbIte;
     var $solution;
 
-    function Prog(){}
+    var $key;
 
+    function Prog(){}
 
     // Cette fonction permet d'enregistrer les données fournies via l'interface web
     function parserDonnees($json)
@@ -19,6 +30,11 @@ class Prog {
         $this->agences = $json["agences"];
         $this->lieuFormation = $json["lieuFormation"];
         $this->nbIte  = $json["nbIte"];
+
+        if(array_key_exists("key", $json)) {
+            $this->key = $json["key"];
+        }
+
         $this->solution = array();
         $this->solution["coutTotal"] = -1;
         $this->solution["listLieuFormationOuvert"] = array();
@@ -91,7 +107,6 @@ class Prog {
         $this->solution["coutTotal"] = $coutTotal;
         $this->solution["listLieuFormationOuvert"] = $this->genererListLieuFormationOuvert($this->lieuFormation);
         $this->solution["listAgence"] = $this->agences;
-        //$this->solution["lieuFormNbPersLeft"]=$this->genererLieuFormNbPersLeft($this->agences,$this->lieuFormation);
 
     }
 
@@ -106,7 +121,7 @@ class Prog {
         return $res;
     }
 
-    //Retourne le meilleur voisin d'un échantillon du voisinage d'un parent
+    // Retourne le meilleur voisin d'un échantillon du voisinage d'un parent
     // On ne génére pas l'ensemble du voisinage pour diminuer le temps de calcul.
     // On génére un voisage de la taille du nombre d'agenceParent
     // On a une probabilité de 1/2 d'affecter l'agence à un lieu de formation déjà ouvert ou à un nouveau lieu de formation
@@ -205,8 +220,22 @@ class Prog {
         echo $json_encode;
     }
 
+    function checkRightsAndLaunchAlgo()
+    {
+        if(isLimitReached(count($this->agences), count($this->lieuFormation), $this->nbIte)) {
+            if(isKeyValid($this->key)) {
+                $this->algoTabou();
+            } else {
+                header('HTTP/1.1 403 Forbidden');
+                exit;
+            }
+        } else {
+            $this->algoTabou();
+        }
+    }
 }
 
 $prog = new Prog;
 $prog->parserDonnees($json_decode);
-$prog->algoTabou();
+$prog->checkRightsAndLaunchAlgo();
+

@@ -1,4 +1,5 @@
 var main = {
+    host: "http://localhost",
     data: {
         agences: [],/* {id, nom, latitude, longitude, codepostal, nbpersonnes,idLieuDeFormation} */
         lieuFormation: [],/* {id, nom, codepostal, latitude, longitude,capaciteInitialie, capaciteRestante,estOuvert} */
@@ -10,54 +11,28 @@ var main = {
         } /*coutTotal, listLieuFormationOuvert, listAgence */
     },
 
-    algoGenetique: function($nbIte, $nbGen){
-        main.data.nbIte = $nbIte;
-        var dataAction =  {
-            "agences": main.data.agences,
-            "lieuFormation": main.data.lieuFormation,
-            "nbIte": $nbIte,
-            "nbGen": $nbGen
-        };
-
-        var jsondata;
-        var data = JSON.stringify(dataAction);
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://chbe.fr/agences/tabou.php", !0);
-        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.send(data);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // in case we reply back from server
-                jsondata = JSON.parse(xhr.responseText);
-                console.log(jsondata);
-                callbackAlgo(1, jsondata);
-            }
-            else {
-                callbackAlgo(3, "");
-            }
-        }
-    },
-
     algoHand: function(){
         var dataAction =  {
             "agences": main.data.agences,
-            "lieuFormation": main.data.lieuFormation
+            "lieuFormation": main.data.lieuFormation,
+            "key": getStoredKey()
         };
 
         var jsondata;
         var data = JSON.stringify(dataAction);
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://chbe.fr/agences/rest3.php", !0);
+        xhr.open("POST", main.host+"/optidis/handmade.php", !0);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.send(data);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                // in case we reply back from server
                 jsondata = JSON.parse(xhr.responseText);
                 console.log(jsondata);
                 callbackAlgo(4, jsondata);
+            }
+            else if(xhr.readyState === 4 && xhr.status === 403) {
+                callbackAlgo(1, "");
             }
             else {
                 callbackAlgo(3, "");
@@ -69,22 +44,25 @@ var main = {
         var dataAction =  {
             "agences": main.data.agences,
             "lieuFormation": main.data.lieuFormation,
-            "nbIte": $nbIte
+            "nbIte": $nbIte,
+            "key": getStoredKey()
         };
 
         var jsondata;
         var data = JSON.stringify(dataAction);
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://chbe.fr/agences/tabou.php", !0);
+        xhr.open("POST", main.host+"/optidis/tabou.php", !0);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.send(data);
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                // in case we reply back from server
                 jsondata = JSON.parse(xhr.responseText);
                 console.log(jsondata);
                 callbackAlgo(2, jsondata);
+            }
+            else if(xhr.readyState === 4 && xhr.status === 403) {
+                callbackAlgo(1, "");
             }
             else {
                 callbackAlgo(3, "");
